@@ -1,0 +1,27 @@
+# Dependencies and build output
+node_modules
+dist
+
+# Environment files (never commit secrets)
+.env
+.env.*
+!.env.example
+
+# Logs and OS files
+*.log
+.DS_Store
+Thumbs.db
+
+# Tooling
+.vercel
+coverage
+*.local
+
+# Local editor / assistant settings
+.claude/
+.vscode/*
+!.vscode/extensions.json
+.idea
+
+# Temporary files from screenshot capture
+.screenshot-*

@@ -1,0 +1,132 @@
+.saved {
+  display: grid;
+  gap: var(--space-6);
+  padding-block: var(--space-7) var(--space-8);
+}
+
+.saved__head {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.saved__title {
+  font-size: clamp(2rem, 1.5rem + 2vw, 3rem);
+  line-height: 1.08;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+}
+
+.saved__section {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.saved__section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-height: 2.5rem;
+}
+
+.saved__section-title {
+  font-size: var(--text-xl);
+}
+
+.saved__section-title:focus {
+  outline: none;
+}
+
+.saved__section-title:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 4px;
+}
+
+.saved__section-title .muted {
+  font-weight: 400;
+}
+
+.saved__empty-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.saved__empty-text {
+  font-size: var(--text-sm);
+}
+
+/* ---------- Confirm ---------- */
+
+.confirm {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.confirm__question {
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+/* ---------- Recent searches ---------- */
+
+.recents {
+  display: grid;
+  gap: var(--space-2);
+  max-width: 44rem;
+  list-style: none;
+}
+
+.recent {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.recent__link {
+  position: relative;
+  flex: 1;
+  display: grid;
+  gap: 0.1rem;
+  min-width: 0;
+  padding: var(--space-3) var(--space-7) var(--space-3) var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: border-color var(--duration) var(--ease);
+}
+
+.recent__link:hover {
+  border-color: var(--color-border-strong);
+}
+
+.recent__link:focus-visible {
+  border-radius: var(--radius-md);
+}
+
+.recent__title {
+  font-weight: 600;
+  font-size: var(--text-sm);
+}
+
+.recent__details {
+  font-size: var(--text-xs);
+}
+
+.recent__arrow {
+  position: absolute;
+  right: var(--space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-muted);
+}
+
+.recent__remove {
+  flex-shrink: 0;
+}

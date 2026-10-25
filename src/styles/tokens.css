@@ -1,0 +1,160 @@
+/*
+  Design tokens for The Spot.
+  Every color in the app should come from these variables so both themes
+  stay consistent. Components never hardcode hex values.
+*/
+
+:root {
+  /* Typography */
+  --font-serif: 'Fraunces Variable', 'Iowan Old Style', 'Georgia', serif;
+  --font-sans: 'DM Sans Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  --text-xs: 0.8125rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: clamp(1.75rem, 1.4rem + 1.5vw, 2.25rem);
+  --text-display: clamp(2.75rem, 1.6rem + 5.2vw, 5.25rem);
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+  --space-9: 6.5rem;
+
+  /* Shape */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-pill: 999px;
+
+  /* Layout */
+  --content-width: 72rem;
+  --gutter: clamp(1rem, 4vw, 2rem);
+  --header-height: 4rem;
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration: 160ms;
+  --duration-slow: 700ms;
+
+  /* Text and overlays on photographs. The same in both themes, because the
+     photo is always behind them. contrast.test.js checks these stay readable
+     even if the photo underneath were pure white. */
+  --on-photo-text: #f7f3ec;
+  --on-photo-muted: #e4ddd1;
+  --photo-overlay: #15130f;
+  --photo-overlay-strong: 78%; /* behind headlines and body text */
+  --photo-overlay-soft: 30%; /* decorative fade only, never behind text */
+
+  --radius-xl: 22px;
+}
+
+/* Light theme (default) */
+:root,
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  --color-bg: #f5f2eb;
+  --color-surface: #fffefa;
+  --color-surface-muted: #ede8dd;
+  --color-surface-elevated: #fffefa;
+  --color-text: #332f29;
+  --color-text-muted: #6b665c;
+  --color-border: #e5ded2;
+  --color-border-strong: #cfc6b6;
+  --color-input-border: #8f8778; /* 3:1+ so form fields and toggles are visible */
+
+  --color-accent: #5d6b51; /* text-safe sage (5:1 on bg) */
+  --color-accent-strong: #5d6b51; /* filled button background */
+  --color-accent-strong-hover: #4c5843;
+  --color-accent-contrast: #fffefa; /* text on filled accent */
+  --color-accent-soft: #e3e7da; /* chip / tint background */
+
+  --color-focus: #4c5843;
+  --color-error: #a1452f;
+  --color-error-soft: #f6e4dc;
+  --shadow-sm: 0 1px 2px rgb(51 47 41 / 0.06);
+  --shadow-md: 0 8px 24px -12px rgb(51 47 41 / 0.22);
+  --shadow-lg: 0 24px 48px -24px rgb(51 47 41 / 0.35);
+
+  /* Muted moodboard tones used for decorative tiles */
+  --tone-sage: #dfe4d5;
+  --tone-clay: #ecd9c8;
+  --tone-sand: #ece3cf;
+  --tone-stone: #dedbd3;
+  --tone-ink: #3d3933;
+  --tone-ink-text: #f4f0e8;
+}
+
+/* Dark theme */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --color-bg: #1c1b18;
+  --color-surface: #26241f;
+  --color-surface-muted: #2b2924;
+  --color-surface-elevated: #302d27;
+  --color-text: #f4f0e8;
+  --color-text-muted: #b7b0a4;
+  --color-border: #413d35;
+  --color-border-strong: #57524a;
+  --color-input-border: #7a7468;
+
+  --color-accent: #a5b394;
+  --color-accent-strong: #a5b394;
+  --color-accent-strong-hover: #b8c4a9;
+  --color-accent-contrast: #1c1b18;
+  --color-accent-soft: #33382c;
+
+  --color-focus: #c3cfb3;
+  --color-error: #e0907a;
+  --color-error-soft: #3b2722;
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.3);
+  --shadow-md: 0 10px 28px -14px rgb(0 0 0 / 0.6);
+  --shadow-lg: 0 28px 56px -24px rgb(0 0 0 / 0.75);
+
+  --tone-sage: #343a2e;
+  --tone-clay: #3e3229;
+  --tone-sand: #3a3428;
+  --tone-stone: #32302b;
+  --tone-ink: #f0ebe1;
+  --tone-ink-text: #1c1b18;
+}
+
+/* Fallback if JavaScript is disabled and the theme attribute was never set */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    --color-bg: #1c1b18;
+    --color-surface: #26241f;
+    --color-surface-muted: #2b2924;
+    --color-surface-elevated: #302d27;
+    --color-text: #f4f0e8;
+    --color-text-muted: #b7b0a4;
+    --color-border: #413d35;
+    --color-border-strong: #57524a;
+    --color-input-border: #7a7468;
+    --color-accent: #a5b394;
+    --color-accent-strong: #a5b394;
+    --color-accent-strong-hover: #b8c4a9;
+    --color-accent-contrast: #1c1b18;
+    --color-accent-soft: #33382c;
+    --color-focus: #c3cfb3;
+    --color-error: #e0907a;
+    --color-error-soft: #3b2722;
+    --tone-sage: #343a2e;
+    --tone-clay: #3e3229;
+    --tone-sand: #3a3428;
+    --tone-stone: #32302b;
+    --tone-ink: #f0ebe1;
+    --tone-ink-text: #1c1b18;
+  }
+}

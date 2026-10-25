@@ -1,0 +1,264 @@
+.cafe-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  transition:
+    transform 300ms var(--ease-out),
+    box-shadow 300ms var(--ease-out),
+    border-color var(--duration) var(--ease);
+}
+
+.cafe-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--color-border-strong);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ---------- Image / placeholder ---------- */
+
+.cafe-image {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--color-surface-muted);
+}
+
+.cafe-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* No verified photo: a warm, textured card instead of an empty box */
+.cafe-image--placeholder {
+  --tone: var(--tone-stone);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: var(--space-4);
+  background:
+    radial-gradient(120% 90% at 85% 10%, color-mix(in srgb, var(--color-surface) 45%, transparent), transparent 60%),
+    radial-gradient(color-mix(in srgb, var(--color-text) 9%, transparent) 1px, transparent 1.3px) 0 0 / 14px 14px,
+    var(--tone);
+}
+
+.cafe-image--sage {
+  --tone: var(--tone-sage);
+}
+
+.cafe-image--clay {
+  --tone: var(--tone-clay);
+}
+
+.cafe-image--sand {
+  --tone: var(--tone-sand);
+}
+
+.cafe-image--stone {
+  --tone: var(--tone-stone);
+}
+
+/* Large editorial initial, partly cropped by the bottom edge */
+.cafe-image__monogram {
+  position: absolute;
+  left: var(--space-4);
+  bottom: -0.18em;
+  font-size: clamp(5rem, 4rem + 3vw, 6.5rem);
+  font-weight: 500;
+  line-height: 1;
+  color: var(--color-text);
+  opacity: 0.85;
+  transition: transform 500ms var(--ease-out);
+}
+
+.cafe-card:hover .cafe-image__monogram {
+  transform: translateY(-6px);
+}
+
+.cafe-image__note {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--color-surface) 82%, transparent);
+  font-size: var(--text-xs);
+  color: var(--color-text);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* ---------- Body ---------- */
+
+.cafe-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  flex: 1;
+  padding: var(--space-4) var(--space-5) var(--space-5);
+}
+
+.cafe-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.cafe-card__name {
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+.cafe-card__link {
+  text-decoration: none;
+}
+
+/* The name link covers the whole card, so the card is one big tap target */
+.cafe-card__link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-xl);
+}
+
+.cafe-card__link:focus-visible {
+  outline: none;
+}
+
+.cafe-card__link:focus-visible::after {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.cafe-card:hover .cafe-card__link {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.cafe-card__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+/* Sits above the card-wide link so it can be clicked on its own */
+.cafe-card__actions .save-btn {
+  position: relative;
+  z-index: 1;
+}
+
+.cafe-card__area {
+  flex-shrink: 0;
+}
+
+.cafe-card__facts {
+  display: grid;
+  gap: var(--space-1);
+  margin: 0;
+  font-size: var(--text-sm);
+}
+
+.cafe-card__fact {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+.cafe-card__fact dt {
+  flex-shrink: 0;
+  color: var(--color-text-muted);
+  transform: translateY(2px);
+}
+
+.cafe-card__fact dd {
+  margin: 0;
+}
+
+.unknown {
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* Full description lives on the details page */
+.cafe-card__description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: var(--text-sm);
+}
+
+.cafe-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  list-style: none;
+}
+
+.cafe-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: auto;
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border);
+}
+
+.cafe-card__confidence {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.cafe-card__more {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-accent);
+  transition: gap var(--duration) var(--ease);
+}
+
+.cafe-card:hover .cafe-card__more {
+  gap: var(--space-2);
+}
+
+.confidence-dot {
+  flex-shrink: 0;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--color-border-strong);
+}
+
+.confidence-dot--high,
+.confidence-dot--medium {
+  background: var(--color-accent);
+}
+
+/* Map buttons sit at the bottom of every card, so buttons line up across a row */
+.cafe-card__maps {
+  margin-top: auto;
+  padding-top: var(--space-2);
+}
+
+.cafe-card__maps + .cafe-card__footer {
+  margin-top: 0;
+}

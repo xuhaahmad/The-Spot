@@ -1,0 +1,202 @@
+.explore {
+  display: grid;
+  gap: var(--space-5);
+  padding-block: var(--space-7) var(--space-8);
+}
+
+.explore__head {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.explore__title {
+  font-size: clamp(2rem, 1.5rem + 2vw, 3rem);
+  line-height: 1.08;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+}
+
+.explore__lede {
+  max-width: 36rem;
+}
+
+/* ---------- Data notice ---------- */
+
+.data-notice {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--color-surface-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+}
+
+.data-notice__icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--color-accent);
+}
+
+.data-notice__body {
+  display: grid;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.data-notice__sources summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--color-accent);
+  width: fit-content;
+}
+
+.data-notice__sources ul {
+  display: grid;
+  gap: var(--space-2);
+  margin-block: var(--space-3);
+  padding-left: var(--space-5);
+  overflow-wrap: anywhere;
+}
+
+/* ---------- Filters ---------- */
+
+.filters {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-4);
+  align-items: end;
+  padding: var(--space-5);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.filters__facilities {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.filters__facilities legend {
+  margin-bottom: var(--space-2);
+  padding: 0;
+}
+
+.filters__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.search-input {
+  position: relative;
+}
+
+.search-input__icon {
+  position: absolute;
+  left: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+.search-input__field {
+  padding-left: 2.25rem;
+}
+
+.select {
+  appearance: none;
+  padding-right: 2.25rem;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--color-text-muted) 50%),
+    linear-gradient(135deg, var(--color-text-muted) 50%, transparent 50%);
+  background-position:
+    right 1.1rem center,
+    right 0.8rem center;
+  background-size: 0.3rem 0.3rem;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.select option {
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+/* Selectable chip (used for filters, and later for the questionnaire) */
+.toggle-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 2.25rem;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--color-input-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background-color var(--duration) var(--ease),
+    border-color var(--duration) var(--ease),
+    color var(--duration) var(--ease);
+}
+
+.toggle-chip:hover {
+  border-color: var(--color-text-muted);
+}
+
+.toggle-chip.is-active {
+  background: var(--color-accent-strong);
+  border-color: var(--color-accent-strong);
+  color: var(--color-accent-contrast);
+}
+
+.toggle-chip:focus-visible {
+  border-radius: var(--radius-pill);
+}
+
+/* ---------- Results ---------- */
+
+.explore__status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-height: 2.25rem;
+}
+
+.explore__count {
+  font-weight: 600;
+}
+
+.explore__hidden-notes {
+  display: grid;
+  gap: var(--space-1);
+  margin-top: calc(var(--space-3) * -1);
+  padding-left: var(--space-5);
+  font-size: var(--text-sm);
+}
+
+@media (max-width: 760px) {
+  .filters {
+    grid-template-columns: 1fr 1fr;
+    padding: var(--space-4);
+  }
+
+  .filters__search {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 420px) {
+  .filters {
+    grid-template-columns: 1fr;
+  }
+}

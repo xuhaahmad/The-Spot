@@ -1,0 +1,592 @@
+/* ==========================================================================
+   Hero: full-bleed photograph with a readable overlay
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: min(88vh, 46rem);
+  overflow: hidden;
+  isolation: isolate;
+  /* Shown while the photo loads, or if it fails */
+  background: var(--photo-overlay);
+  color: var(--on-photo-text);
+}
+
+.hero__media,
+.hero__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero__media {
+  z-index: -2;
+}
+
+.hero__media img {
+  object-fit: cover;
+  object-position: 50% 45%;
+}
+
+/* Strong where the text sits (left/bottom), softer over the rest of the photo */
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--photo-overlay) var(--photo-overlay-strong), transparent) 0%,
+      color-mix(in srgb, var(--photo-overlay) var(--photo-overlay-strong), transparent) 60%,
+      color-mix(in srgb, var(--photo-overlay) var(--photo-overlay-soft), transparent) 100%
+    ),
+    linear-gradient(0deg, color-mix(in srgb, var(--photo-overlay) 40%, transparent), transparent 40%);
+}
+
+.hero__inner {
+  padding-block: var(--space-9) var(--space-8);
+}
+
+.hero__copy {
+  display: grid;
+  gap: var(--space-5);
+  max-width: 40rem;
+}
+
+.hero__eyebrow {
+  color: var(--on-photo-muted);
+}
+
+.hero__title {
+  font-size: clamp(3rem, 1.6rem + 6vw, 6.25rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 0.98;
+}
+
+.hero__lede {
+  max-width: 32rem;
+  font-size: var(--text-lg);
+  color: var(--on-photo-muted);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.hero__quick {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  margin-top: var(--space-3);
+  font-size: var(--text-sm);
+}
+
+.hero__quick-label {
+  color: var(--on-photo-muted);
+}
+
+.hero__quick ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  list-style: none;
+}
+
+.hero__quick-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.25rem;
+  padding: 0 var(--space-3);
+  border: 1px solid color-mix(in srgb, var(--on-photo-text) 45%, transparent);
+  border-radius: var(--radius-pill);
+  color: var(--on-photo-text);
+  text-decoration: none;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition:
+    background-color var(--duration) var(--ease),
+    border-color var(--duration) var(--ease);
+}
+
+.hero__quick-link:hover {
+  background: color-mix(in srgb, var(--on-photo-text) 16%, transparent);
+  border-color: var(--on-photo-text);
+}
+
+.hero__quick-link:focus-visible {
+  outline-color: var(--on-photo-text);
+  border-radius: var(--radius-pill);
+}
+
+.hero__credit {
+  position: absolute;
+  right: var(--gutter);
+  bottom: var(--space-3);
+}
+
+/* Entrance: the photo settles, then the words rise in */
+@media (prefers-reduced-motion: no-preference) {
+  .hero__media img {
+    animation: settle-in 1600ms var(--ease-out) both;
+  }
+
+  .hero__copy > * {
+    animation: rise-in 800ms var(--ease-out) both;
+  }
+
+  .hero__copy > :nth-child(2) {
+    animation-delay: 80ms;
+  }
+
+  .hero__copy > :nth-child(3) {
+    animation-delay: 160ms;
+  }
+
+  .hero__copy > :nth-child(4) {
+    animation-delay: 240ms;
+  }
+
+  .hero__copy > :nth-child(5) {
+    animation-delay: 320ms;
+  }
+}
+
+/* ==========================================================================
+   Shared section layout
+   ========================================================================== */
+
+.section {
+  padding-block: var(--space-9);
+}
+
+.section--muted {
+  background: var(--color-surface-muted);
+}
+
+.section__head {
+  display: grid;
+  gap: var(--space-2);
+  margin-bottom: var(--space-7);
+  max-width: 40rem;
+}
+
+.section__head--split {
+  max-width: none;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 24rem);
+  align-items: end;
+  gap: var(--space-5);
+}
+
+.section__title {
+  font-size: clamp(2rem, 1.5rem + 2vw, 3rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+}
+
+.section__aside {
+  justify-self: end;
+}
+
+.photo-note {
+  margin-top: var(--space-4);
+  font-size: var(--text-xs);
+}
+
+/* ==========================================================================
+   How it works
+   ========================================================================== */
+
+.how__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: var(--space-8);
+  align-items: start;
+}
+
+.how__head {
+  display: grid;
+  gap: var(--space-3);
+  position: sticky;
+  top: calc(var(--header-height) + var(--space-6));
+}
+
+.how__lede {
+  font-size: var(--text-lg);
+}
+
+.steps {
+  display: grid;
+  gap: var(--space-2);
+  list-style: none;
+}
+
+.steps__item {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  column-gap: var(--space-4);
+  row-gap: var(--space-1);
+  padding-block: var(--space-5);
+  border-top: 1px solid var(--color-border-strong);
+}
+
+.steps__number {
+  grid-row: span 2;
+  font-size: 2.75rem;
+  line-height: 1;
+  color: var(--color-accent);
+}
+
+.steps__title {
+  font-size: var(--text-xl);
+}
+
+/* ==========================================================================
+   Plan tiles: photo grid
+   ========================================================================== */
+
+.plans {
+  padding-top: 0;
+}
+
+/* Desktop: 4 columns x 2 rows. Reunion is wide, study and catch-up are tall:
+   2 + 2 + 2 + 1 + 1 = 8 cells, so the grid fills with no gaps. */
+.plan-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: 16rem;
+  gap: var(--space-4);
+  list-style: none;
+}
+
+.plan-tile--wide {
+  grid-column: span 2;
+}
+
+/* Keep the faces above the text overlay */
+.plan-tile--wide .plan-tile__image {
+  object-position: 50% 30%;
+}
+
+.plan-tile--tall {
+  grid-row: span 2;
+}
+
+.plan-tile__link {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  /* Fixed dark fallback (not the theme's ink colour, which flips to cream in
+     dark mode) so the light text stays readable if the photo fails to load */
+  background: var(--photo-overlay);
+  color: var(--on-photo-text);
+  text-decoration: none;
+  isolation: isolate;
+}
+
+.plan-tile__image {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 900ms var(--ease-out);
+}
+
+/* Strong shade behind the text (bottom 60%), fading out over the top of the photo */
+.plan-tile__shade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    0deg,
+    color-mix(in srgb, var(--photo-overlay) var(--photo-overlay-strong), transparent) 0%,
+    color-mix(in srgb, var(--photo-overlay) var(--photo-overlay-strong), transparent) 60%,
+    color-mix(in srgb, var(--photo-overlay) 10%, transparent) 100%
+  );
+}
+
+.plan-tile__content {
+  display: grid;
+  gap: var(--space-1);
+  width: 100%;
+  padding: var(--space-5);
+}
+
+.plan-tile__icon {
+  margin-bottom: var(--space-2);
+  color: var(--on-photo-muted);
+}
+
+.plan-tile__title {
+  font-size: var(--text-2xl);
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.plan-tile__text {
+  max-width: 22rem;
+  font-size: var(--text-sm);
+  color: var(--on-photo-muted);
+}
+
+.plan-tile__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-top: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  transition: gap var(--duration) var(--ease);
+}
+
+.plan-tile__link:hover .plan-tile__image,
+.plan-tile__link:focus-visible .plan-tile__image {
+  transform: scale(1.05);
+}
+
+.plan-tile__link:hover .plan-tile__cta {
+  gap: var(--space-2);
+}
+
+.plan-tile__link:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+  border-radius: var(--radius-xl);
+}
+
+/* ==========================================================================
+   Featured cafés
+   ========================================================================== */
+
+.featured__more {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-6);
+}
+
+/* ==========================================================================
+   Honest by design: editorial image + text
+   ========================================================================== */
+
+.honest__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: var(--space-8);
+  align-items: center;
+}
+
+.honest__media {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.honest__media img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: var(--radius-xl);
+  background: var(--color-surface-muted);
+}
+
+.honest__content {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.principles {
+  display: grid;
+  gap: var(--space-5);
+  list-style: none;
+}
+
+.principle {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-4);
+  align-items: start;
+}
+
+.principle__icon {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+}
+
+.principle__title {
+  margin-bottom: var(--space-1);
+  font-size: var(--text-lg);
+}
+
+/* ==========================================================================
+   Closing call to action
+   ========================================================================== */
+
+.cta {
+  padding-top: 0;
+}
+
+.cta-band {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  padding: var(--space-8) var(--space-7);
+  background:
+    radial-gradient(120% 140% at 100% 0%, color-mix(in srgb, var(--color-accent) 28%, transparent), transparent 55%),
+    var(--tone-ink);
+  color: var(--tone-ink-text);
+  border-radius: var(--radius-xl);
+}
+
+.cta-band__eyebrow {
+  color: inherit;
+  opacity: 0.8;
+}
+
+.cta-band__title {
+  margin-top: var(--space-2);
+  font-size: clamp(2rem, 1.4rem + 2.4vw, 3.25rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+/* The band flips colours with the theme, so its button flips too to keep contrast */
+.cta-band__btn {
+  background: var(--tone-ink-text);
+  color: var(--tone-ink);
+}
+
+.cta-band__btn:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--tone-ink-text) 85%, var(--tone-ink));
+}
+
+.cta-band__btn:focus-visible {
+  outline-color: var(--tone-ink-text);
+}
+
+.credits a {
+  color: inherit;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 960px) {
+  .how__inner,
+  .honest__inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .how__head {
+    position: static;
+  }
+
+  .honest__media {
+    max-width: 30rem;
+  }
+
+  .honest__media img {
+    aspect-ratio: 4 / 3;
+  }
+
+  .plan-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: 15rem;
+  }
+
+  .plan-tile--tall {
+    grid-row: span 1;
+  }
+}
+
+@media (max-width: 760px) {
+  .section {
+    padding-block: var(--space-8);
+  }
+
+  .section__head--split {
+    grid-template-columns: 1fr;
+  }
+
+  .section__aside {
+    justify-self: start;
+  }
+}
+
+@media (max-width: 700px) {
+  .hero {
+    min-height: min(92svh, 44rem);
+  }
+
+  /* On phones the text spans the full width, so darken evenly from the bottom */
+  .hero__overlay {
+    background: linear-gradient(
+      0deg,
+      color-mix(in srgb, var(--photo-overlay) var(--photo-overlay-strong), transparent) 0%,
+      color-mix(in srgb, var(--photo-overlay) var(--photo-overlay-strong), transparent) 85%,
+      color-mix(in srgb, var(--photo-overlay) 45%, transparent) 100%
+    );
+  }
+
+  .hero__inner {
+    padding-block: var(--space-8) var(--space-8);
+  }
+
+  .hero__credit {
+    left: var(--gutter);
+    right: auto;
+  }
+}
+
+@media (max-width: 560px) {
+  .plan-grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 14rem;
+  }
+
+  .plan-tile--wide {
+    grid-column: span 1;
+  }
+
+  .steps__item {
+    grid-template-columns: 3rem minmax(0, 1fr);
+  }
+
+  .steps__number {
+    font-size: 2rem;
+  }
+
+  .cta-band {
+    padding: var(--space-7) var(--space-5);
+  }
+
+  .cta-band__btn {
+    width: 100%;
+  }
+
+  .hero__actions .btn {
+    flex: 1 1 100%;
+  }
+}
