@@ -45,6 +45,15 @@ function normalizeUrl(value) {
   }
 }
 
+// Café photos may be a full http(s) URL or a file served by this site
+// (e.g. "/cafes/shaghf-f8.webp" in public/). "//host/..." is rejected because
+// browsers treat it as another website.
+function normalizeImageUrl(value) {
+  const text = textOrNull(value)
+  if (text && /^\/[^/\\]/.test(text) && !/[\s"'<>]/.test(text)) return text
+  return normalizeUrl(text)
+}
+
 /**
  * Turns one raw JSON record into a clean café object with every field present.
  * Returns { cafe } on success or { error } when the record cannot be used.
@@ -82,8 +91,10 @@ export function normalizeCafe(raw) {
           : null,
       website: normalizeUrl(raw.website),
       instagram: normalizeUrl(raw.instagram),
-      imageUrl: normalizeUrl(raw.imageUrl),
+      imageUrl: normalizeImageUrl(raw.imageUrl),
+      // Who took the photo / where it is from, shown as a credit on the photo
       imageSource: textOrNull(raw.imageSource),
+      imageSourceUrl: normalizeUrl(raw.imageSourceUrl),
       sourceIds: Array.isArray(raw.sourceIds) ? raw.sourceIds.filter((s) => typeof s === 'string') : [],
       // Which source backs which field, e.g. { address: 'zameen-2019' }
       fieldSources: Object.fromEntries(

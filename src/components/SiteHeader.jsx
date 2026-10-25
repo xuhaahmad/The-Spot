@@ -69,11 +69,14 @@ export default function SiteHeader() {
                 )}
               </NavLink>
             </li>
-            <li>
-              <Link to="/find" className="btn btn--primary btn--small site-nav__cta">
-                Find your spot
-              </Link>
-            </li>
+            {/* On the homepage the hero has the main "Find your spot" button, so skip the duplicate here */}
+            {location.pathname !== '/' && (
+              <li>
+                <Link to="/find" className="btn btn--primary btn--small site-nav__cta">
+                  Find your spot
+                </Link>
+              </li>
+            )}
           </ul>
         </nav>
 

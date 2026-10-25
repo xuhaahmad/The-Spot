@@ -66,7 +66,7 @@ export const PHOTOS = {
     credit: unsplash('Ivan Le', 'https://unsplash.com/photos/a-person-reading-a-book-Z4LY9zQ3sIg'),
   },
   latte: {
-    // The site's own photo, shared with the favicon in /public
+    // The site's own photo, in /public
     src: '/latte-art.jpg',
     width: 735,
     height: 713,

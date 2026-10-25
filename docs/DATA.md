@@ -50,11 +50,37 @@ are added or edited.
 | `noiseLevel`, `openingHours` | string or null | Currently all unknown |
 | `website`, `instagram`, `imageUrl` | URL or null | Only `http(s)` URLs are accepted |
 | `googlePlaceId` | string or null | Optional. A Google place ID (e.g. `ChIJ…`) you have checked points to this exact branch. Makes "Get directions" and "View on Google Maps" exact. Never guess one |
-| `imageSource` | string or null | Credit / licence for the image |
+| `imageSource` | string or null | Credit shown on the photo, e.g. `Shaghf Islamabad, used with permission`. Required when `imageUrl` is set |
+| `imageSourceUrl` | URL or null | Optional link for the credit (the original photo or the café's page) |
 | `sourceIds`, `fieldSources` | source references | Which source backs which field |
 | `notes` | string or null | Anything a future editor should know |
 | `lastChecked` | date | When the sources were last reviewed |
 | `dataConfidence` | `high` / `medium` / `low` | See rule 7 |
+
+## Adding a café photo
+
+No café has a photo yet. No photo of these specific cafés was found that may be reused
+(October 2026 search: café websites, Wikimedia Commons, published articles). When you have one,
+for example your own photo or one a café has given permission to use:
+
+1. Resize it to about 1200px wide (WebP or JPEG, ideally under 200 KB).
+2. Save it as `public/cafes/<café id>.webp`, for example `public/cafes/shaghf-f8.webp`.
+3. In `src/data/cafes.json`, set on that café:
+   ```json
+   "imageUrl": "/cafes/shaghf-f8.webp",
+   "imageSource": "Your name, own photo",
+   "imageSourceUrl": null
+   ```
+4. Run `npm test`. A photo without an `imageSource` credit fails the tests.
+
+The card, results and details page then show the photo with its credit, cropped to the same shape
+as the placeholder. If it ever fails to load, the "No verified photo" placeholder comes back.
+
+Never use a generic or stock photo here: on a named café's card it would imply it shows that café.
+
+**Google Places photos** are possible later, but they need a Google Cloud project with billing
+enabled and an API key. They must be loaded live (they can't be saved in this repository), and they
+must show the photographer's credit plus Google Maps attribution. Ask before setting this up.
 
 ## Leads not yet included
 

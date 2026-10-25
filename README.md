@@ -253,5 +253,5 @@ and listed with their credits in [`src/data/photos.js`](src/data/photos.js).
 | [Four friends at a café table](https://unsplash.com/photos/four-friends-are-sitting-together-at-a-table-wAntJVFnMh8) | Vitaly Gariev |
 | [Reading a book](https://unsplash.com/photos/a-person-reading-a-book-Z4LY9zQ3sIg) | Ivan Le |
 
-The latte-art photo (also the site icon, [`public/latte-art.jpg`](public/latte-art.jpg)) belongs to
+The latte-art photo ([`public/latte-art.jpg`](public/latte-art.jpg)) belongs to
 The Spot.

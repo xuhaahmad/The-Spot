@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- The Spot: espresso cup on a saucer. Transparent background.
+       Espresso brown on light browser tabs, warm cream on dark tabs. -->
+  <style>
+    .ink { fill: #332f29; }
+    .line { fill: none; stroke: #332f29; stroke-linecap: round; }
+    .crema { fill: #718064; }
+    @media (prefers-color-scheme: dark) {
+      .ink { fill: #f4f0e8; }
+      .line { stroke: #f4f0e8; }
+      .crema { fill: #a5b394; }
+    }
+  </style>
+  <!-- Steam -->
+  <path class="line" stroke-width="1.8" d="M12 2.8c-1.4 1.4 1.4 2.8 0 4.2M17 2.8c-1.4 1.4 1.4 2.8 0 4.2" />
+  <!-- Cup -->
+  <path class="ink" d="M5 10h18v5.2a9 9 0 0 1-18 0z" />
+  <!-- Handle -->
+  <path class="line" stroke-width="2.4" d="M23 12.4h1.6a3.4 3.4 0 0 1 0 6.8h-2.4" />
+  <!-- Crema -->
+  <rect class="crema" x="7.2" y="11.6" width="13.6" height="1.8" rx="0.9" />
+  <!-- Saucer -->
+  <rect class="ink" x="2" y="26.6" width="25" height="2.6" rx="1.3" />
+</svg>

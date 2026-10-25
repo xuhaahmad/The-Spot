@@ -300,20 +300,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section cta" aria-labelledby="cta-title">
+      {/* The hero holds the page's one "Find your spot" button; this is just the photo credits */}
+      <div className="section credits-section">
         <div className="container">
-          <Reveal className="cta-band">
-            <div>
-              <p className="eyebrow cta-band__eyebrow">Ready when you are</p>
-              <h2 id="cta-title" className="serif cta-band__title">
-                Your next favorite is out there.
-              </h2>
-            </div>
-            <Link to="/find" className="btn btn--large cta-band__btn">
-              Find your spot
-              <ArrowRight size={18} aria-hidden="true" />
-            </Link>
-          </Reveal>
           <p className="photo-note muted credits">
             Photography by{' '}
             {UNSPLASH_PHOTOS.map((photo, index) => (
@@ -328,7 +317,7 @@ export default function HomePage() {
             on Unsplash. Latte art by The Spot.
           </p>
         </div>
-      </section>
+      </div>
     </>
   )
 }

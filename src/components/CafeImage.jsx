@@ -11,9 +11,10 @@ function toneFor(id) {
 }
 
 /**
- * Shows the café photo when one is available, otherwise (or if it fails to
- * load) a designed placeholder that says plainly there is no verified photo.
- * Generic stock photos are never used here: they would imply they show this café.
+ * Shows the café's own verified photo when the data has one (with its credit),
+ * otherwise, or if it fails to load, a designed placeholder that says plainly
+ * there is no verified photo. Generic stock photos are never used here: they
+ * would imply they show this café.
  */
 export default function CafeImage({ cafe }) {
   const [failed, setFailed] = useState(false)
@@ -21,8 +22,27 @@ export default function CafeImage({ cafe }) {
 
   if (showPhoto) {
     return (
-      <div className="cafe-image">
-        <img src={cafe.imageUrl} alt={`${cafe.name}`} loading="lazy" onError={() => setFailed(true)} />
+      <div className="cafe-image cafe-image--photo">
+        <img
+          src={cafe.imageUrl}
+          alt={`${cafe.name}${cafe.area ? `, ${cafe.area}` : ''}`}
+          loading="lazy"
+          decoding="async"
+          onError={() => setFailed(true)}
+        />
+        {cafe.imageSource && (
+          <span className="cafe-image__credit">
+            Photo:{' '}
+            {cafe.imageSourceUrl ? (
+              <a href={cafe.imageSourceUrl} target="_blank" rel="noopener noreferrer">
+                {cafe.imageSource}
+                <span className="visually-hidden"> (opens in a new tab)</span>
+              </a>
+            ) : (
+              cafe.imageSource
+            )}
+          </span>
+        )}
       </div>
     )
   }

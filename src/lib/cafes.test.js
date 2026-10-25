@@ -67,6 +67,15 @@ describe('normalizeCafe', () => {
     expect(cafe.purposes).toEqual([])
   })
 
+  it('accepts café photos as https URLs or files on this site, and rejects anything else', () => {
+    expect(makeCafe({ imageUrl: '/cafes/shaghf-f8.webp' }).imageUrl).toBe('/cafes/shaghf-f8.webp')
+    expect(makeCafe({ imageUrl: 'https://example.com/photo.jpg' }).imageUrl).toBe('https://example.com/photo.jpg')
+    for (const bad of ['//evil.example/x.jpg', 'javascript:alert(1)', 'photo.jpg', '/cafes/a b.jpg', '/\\evil.example/x.jpg']) {
+      expect(makeCafe({ imageUrl: bad }).imageUrl, bad).toBeNull()
+    }
+    expect(makeCafe({ imageSourceUrl: 'javascript:alert(1)' }).imageSourceUrl).toBeNull()
+  })
+
   it('only keeps http(s) links', () => {
     expect(makeCafe({ website: 'javascript:alert(1)' }).website).toBeNull()
     expect(makeCafe({ website: 'not a url' }).website).toBeNull()
@@ -212,6 +221,12 @@ describe('src/data/cafes.json integrity', () => {
       for (const [field, labels] of Object.entries(vocabularies)) {
         for (const value of raw[field]) expect(Object.keys(labels), `${raw.id} ${field}`).toContain(value)
       }
+    }
+  })
+
+  it('credits every café photo (a photo without a source fails)', () => {
+    for (const raw of rawDataset.cafes) {
+      if (raw.imageUrl) expect(raw.imageSource, `${raw.id} has a photo but no imageSource credit`).toBeTruthy()
     }
   })
 
